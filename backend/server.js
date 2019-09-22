@@ -1,8 +1,13 @@
+const dotenv = require('dotenv').config({ path: '../.env'});
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+
+if (dotenv.error) {
+    throw dotenv.error;
+}
 
 const contactRoutes = express.Router();
 let Contact = require('./models/contact');
@@ -11,7 +16,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Attempt to connect to the MongoDB database
-mongoose.connect('mongodb://127.0.0.1:27017/contact-manager', { useNewUrlParser: true });
+const uri = process.env.DB_HOST
+                .replace('<username>', process.env.DB_USER)
+                .replace('<password>', process.env.DB_PASSWORD);
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const database = mongoose.connection;
 
 database.once('open', function() {
