@@ -1,9 +1,13 @@
 # contact-manager
 COP4331C Project #1
 
-Clone the repo, install Node.js if you don't have it already, then run
-`npm install`
-`npm start`
+Clone the repo, install Node.js and MongoDB if you don't have it already, then run
+```
+> npm install
+> npm start
+> cd backend
+> nodemon server
+```
 
 Make commits to the corresponding branch: API, Database, or Frontend
 Make pull requests into develop one a feature is complete
@@ -22,7 +26,7 @@ https://drive.google.com/file/d/1fsCjt9x0OloRtdr2OfcnxroDHZBkDpQ5/view?usp=shari
 Starting from the root directory,
 ```
 > cd backend
-> mongoimport --db contact-manager --collection contacts -- file sample_data.json --jsonArray
+> mongoimport --db contact-manager --collection contacts --file sample_data.json --jsonArray
 ```
 
 
@@ -40,6 +44,12 @@ Then, look at your databases, then collections, then call find on our new one
 > db.contacts.find()
 ```
 The last line should show a few entries from the collection. If you see this, everything is set up!
+
+3. Start the API
+```
+> nodemon server
+```
+The API will now be ready to process requests.
 
 ## Testing the API endpoints
 
