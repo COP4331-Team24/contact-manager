@@ -10,6 +10,9 @@ let Contact = new Schema({
     },
     number: {
         type: String
+    },
+    user_id: {
+        type: Number
     }
 });
 

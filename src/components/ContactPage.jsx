@@ -5,13 +5,13 @@ import Contact from "./Contact"
 class ViewContacts extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {contacts: []};
+        this.state = { contacts: [] };
     }
 
     // componentDidMount() is called after a component is slapped into DOM
     // Because we're trying to view all the contacts, query the api for them
     componentDidMount() {
-        axios.get('http://localhost:4000/api/contacts/')
+        axios.get('/contacts/')
             .then(res => {
                 this.setState({ contacts: res.data });
             })
@@ -21,19 +21,19 @@ class ViewContacts extends React.Component {
     }
     render() {
         return (
-            <div class="card-deck d-flex justify-content-center">
-                <div class="w-100 align-self-center">       
+            <div className="card-deck d-flex justify-content-center">
+                <div className="w-100 align-self-center">
                     <h1>View all contacts</h1>
                     <p>[put a search bar here or something]</p>
                 </div>
-                { this.displayContacts() }
+                {this.displayContacts()}
             </div>
         )
     }
 
     displayContacts() {
         // For each contact in contacts, return a new contact component
-        return this.state.contacts.map(function(contact, i) {
+        return this.state.contacts.map(function (contact, i) {
             // {...contact} is JavaScript's unpacking operator, 
             // basically saves the trouble of writing firtname={contact.firstname} and so on..
             return <Contact {...contact} key={i} />;
