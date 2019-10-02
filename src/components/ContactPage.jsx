@@ -29,7 +29,7 @@ class ViewContacts extends React.Component {
 
     refresh() {
         let self = this;
-        self.getAllContacts();
+        self.filterContacts();
         this.setState({ filtered: self.state.contacts });
     }
 
