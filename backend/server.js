@@ -1,6 +1,6 @@
 const contactRoutes = require('./ContactRoutes');
 const authRoutes = require('./AuthRoutes');
-const dotenv = require('dotenv').config({ path: '../.env' });
+const dotenv = require('dotenv').config({ path: './.env' });
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
