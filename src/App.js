@@ -9,7 +9,7 @@ import CreateContact from "./components/CreateContact";
 import Login from "./components/Login";
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = 'https://contact-manager-group24.herokuapp.com/api';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('auth_token');
 
 function App() {
