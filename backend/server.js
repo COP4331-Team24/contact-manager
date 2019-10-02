@@ -1,15 +1,10 @@
 const contactRoutes = require('./ContactRoutes');
 const authRoutes = require('./AuthRoutes');
-const dotenv = require('dotenv').config({ path: './.env' });
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-
-if (dotenv.error) {
-    throw dotenv.error;
-}
 
 app.use(cors());
 app.use(bodyParser.json());
