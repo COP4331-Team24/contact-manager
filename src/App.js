@@ -8,7 +8,7 @@ import CreateContact from "./components/CreateContact";
 import Login from "./components/Login";
 import axios from 'axios';
 
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('auth_token');
 
 function App() {
