@@ -1,7 +1,11 @@
 const express = require('express');
+const authMiddleware = require('./AuthMiddleware');
 
 let contactRoutes = express.Router();
 let Contact = require('./models/contact');
+
+// Auth middleware, make sure the user is logged in
+contactRoutes.use(authMiddleware);
 
 // Define contact API endpoints
 contactRoutes.route('/').get(function (req, res) {

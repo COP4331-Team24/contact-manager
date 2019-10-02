@@ -27,4 +27,26 @@ authRoutes.route('/create').post(function (req, res) {
         })
 });
 
+authRoutes.route('/login').post(function (req, res) {
+    User.findOne({ username: req.body.username }, function (err, user) {
+        if (user && bcrypt.compareSync(req.body.password, user.password)) {
+            let auth = bcrypt.hashSync(new Date().getTime().toString(), salt);
+            user.auth = auth;
+            user.save()
+                .then(() => {
+                    res.status(200).json({
+                        'message': 'Logged in',
+                        'auth': auth
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status('500').send('Failed to generate auth token')
+                });
+        } else {
+            res.status(400).send('Failed to find user');
+        }
+    });
+})
+
 module.exports = authRoutes;
