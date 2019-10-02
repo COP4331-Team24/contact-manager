@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 
-const dotenv = require('dotenv').config({ path: './.env' });
+// const dotenv = require('dotenv').config({ path: './.env' });
 const port = 4000;
 
 app.use(cors());
