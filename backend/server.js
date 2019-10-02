@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 
+// const dotenv = require('dotenv').config({ path: './.env' });
+const port = process.env.PORT || 4000;
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -29,6 +32,6 @@ database.on('error', error => {
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
 
-app.listen(4000, function () {
-    console.log("Server is running on port 4000");
+app.listen(port, function () {
+    console.log("Server is running on port " + port);
 });
