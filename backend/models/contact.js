@@ -12,7 +12,7 @@ let Contact = new Schema({
         type: String
     },
     user_id: {
-        type: Number
+        type: String
     }
 });
 

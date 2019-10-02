@@ -9,7 +9,7 @@ contactRoutes.use(authMiddleware);
 
 // Define contact API endpoints
 contactRoutes.route('/').get(function (req, res) {
-    Contact.find(function (err, contacts) {
+    Contact.find({ 'user_id': req.user_id }, function (err, contacts) {
         if (err) {
             console.log(err);
         } else {
@@ -31,44 +31,47 @@ contactRoutes.route('/add').post(function (req, res) {
 });
 
 // Find contact by id
-contactRoutes.route('/:id').get(function (req, res) {
-    let id = req.params.id;
+contactRoutes.route('/get').get(function (req, res) {
+    let id = req.body._id;
     Contact.findById(id, function (err, contact) {
-        res.json(contact);
+        if (err) {
+            res.status(400).send("Couldn't find contact");
+        } else {
+            res.json(contact);
+        }
     });
 });
 
 // Edit contact by id
-contactRoutes.route('/update/:id').get(function (req, res) {
-    let id = req.params.id;
+contactRoutes.route('/update').patch(function (req, res) {
+    let id = req.body._id;
     Contact.findById(id, function (err, contact) {
         if (!contact) {
-            res.status(404).send("What... Where am I?\n\n What is this!?\n\n\nPlease, don't go back.");
+            res.status(400).send("Couldn't update contact.");
         }
         else {
             contact.firstname = req.body.firstname;
             contact.lastname = req.body.lastname;
             contact.number = req.body.number;
+            contact.save()
+                .then(contact => {
+                    res.status(200).json(contact);
+                })
+                .catch(err => {
+                    res.status(500).send('Error updating contact');
+                });
         }
-        contact.save()
-            .then(contact => {
-                res.status(200).json({ 'contact': 'contact edited successfully' });
-            })
-            .catch(err => {
-                res.status(400).send('You\'re a failure and a disappointment.');
-            });
     });
 });
 
 // Delete contact by id.
-contactRoutes.route('/delete/:id').get(function (req, res) {
-    let id = req.params.id;
+contactRoutes.route('/delete').delete(function (req, res) {
+    let id = req.body._id;
     Contact.findByIdAndDelete(id, function (err) {
         if (err) {
-            res.status(400).send('You\'re a failure and a disappointment.');
+            res.status(400).send('Could not delete contact');
         }
-
-        res.status(200).json({ 'contact': 'contact yeeted successfully' });
+        res.status(200).send('deleted contact: ' + id + ' successfully.');
     });
 });
 
