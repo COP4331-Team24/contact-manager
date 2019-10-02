@@ -4,26 +4,28 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
-    "bootstrap": "^4.3.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1"
   },
   "proxy": "http://localhost:4000",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm-run-all --parallel web server",
+    "web": "react-scripts start",
+    "server": "node ./backend/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "node ./backend/server.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
