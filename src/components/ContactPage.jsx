@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Contact from "./Contact"
+import Contact from "./Contact";
+import CreateContact from "./CreateContact";
 
 class ViewContacts extends React.Component {
     constructor(props) {
@@ -70,24 +71,39 @@ class ViewContacts extends React.Component {
         })
     }
 
+    showAddForm(event) {
+
+    }
+
     render() {
         return (
-            <div className="d-flex flex-column justify-content-center">
-                <div className="w-50 ml-auto mr-auto mb-3">
-                    <h1>View all contacts</h1>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            name="search"
-                            onChange={this.filterContacts}
-                            className="form-control"
-                            value={this.state.searchString}
-                            placeholder="Filter contacts"
-                            autoComplete="off" />
+            <div>
+                <CreateContact refreshParent={this.refresh} />
+                <div className="d-flex flex-column justify-content-center">
+                    <div className="w-50 ml-auto mr-auto mb-3">
+                        <div className="d-flex justify-content-between">
+                            <h1>View all contacts</h1>
+                            <button
+                                className="btn btn-info m-2"
+                                data-toggle="modal"
+                                data-target="#create-modal">
+                                Add Contact
+                            </button>
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                name="search"
+                                onChange={this.filterContacts}
+                                className="form-control"
+                                value={this.state.searchString}
+                                placeholder="Filter contacts"
+                                autoComplete="off" />
+                        </div>
                     </div>
-                </div>
-                <div className="w-50 ml-auto mr-auto">
-                    {this.displayContacts()}
+                    <div className="w-50 ml-auto mr-auto">
+                        {this.displayContacts()}
+                    </div>
                 </div>
             </div>
         )

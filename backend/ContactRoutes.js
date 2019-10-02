@@ -19,8 +19,14 @@ contactRoutes.route('/').get(function (req, res) {
 });
 
 // Add contact
-contactRoutes.route('/add').post(function (req, res) {
-    let contact = new Contact(req.body);
+contactRoutes.route('/create').post(function (req, res) {
+    let contact = new Contact({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        number: req.body.number,
+        user_id: req.user_id
+    });
+    console.log(req);
     contact.save()
         .then(contact => {
             res.status(200).json({ 'contact': 'contact added successfully' });
