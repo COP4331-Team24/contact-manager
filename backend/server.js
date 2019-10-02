@@ -5,10 +5,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 
-const dotenv = require('dotenv').config({ path: './.env' });
-const port = process.env.PORT || 8080;
+// const dotenv = require('dotenv').config({ path: './.env' });
+const port = process.env.PORT || 5000;
 
+app.use(express.static(path.join(__dirname, '../build')));
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -31,6 +33,10 @@ database.on('error', error => {
 // Connect routes and start server
 app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../build/index.html'));
+});
 
 app.listen(port, function () {
     console.log("Server is running on port " + port);
